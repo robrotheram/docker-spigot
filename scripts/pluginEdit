@@ -1,0 +1,48 @@
+#!/bin/bash
+# script to change DB settings of each plugin config.
+# Congifs that have same names add in the number of spaces see line 47 as a examplecommand
+# author
+
+
+HOSTNAME="$MYSQL_PORT_3306_TCP_ADDR"
+USER="root"
+PASSWORD="mallard"
+PORT="3306"
+DB="minecraft"
+DIR="/minecraft/plugins"
+
+
+
+# prism Config Changes
+cd $DIR/Prism
+sed "s/hostname.*/hostname: $HOSTNAME/g" config.yml >tmp.yml && mv tmp.yml config.yml
+sed "s/username.*/username: $USER/g" config.yml >tmp.yml && mv tmp.yml config.yml
+sed "s/password.*/password: $PASSWORD/g" config.yml >tmp.yml && mv tmp.yml config.yml
+sed "s/port.*/port: $PORT/g" config.yml >tmp.yml && mv tmp.yml config.yml
+sed "s/    database.*/    database: $DB/g" config.yml >tmp.yml && mv tmp.yml config.yml
+
+
+
+
+
+# Stables Config Changes
+cd $DIR/Stables
+sed "s/useSQLite.*/useSQLite: false/g" config.yml >tmp.yml && mv tmp.yml config.yml
+sed "s/useSQLite.*/useMySQL: true/g" config.yml >tmp.yml && mv tmp.yml config.yml
+sed "s/host.*/host: $HOSTNAME/g" config.yml >tmp.yml && mv tmp.yml config.yml
+sed "s/user.*/user: $USER/g" config.yml >tmp.yml && mv tmp.yml config.yml
+sed "s/password.*/password: $PASSWORD/g" config.yml >tmp.yml && mv tmp.yml config.yml
+sed "s/port.*/port: $PORT/g" config.yml >tmp.yml && mv tmp.yml config.yml
+sed "s/  database.*/  database: $DB/g" config.yml >tmp.yml && mv tmp.yml config.yml
+
+
+
+
+
+# Stables Config Changes
+cd $DIR/LWC
+sed "s/adapter.*/adapter: mysql/g" core.yml >tmp.yml && mv tmp.yml core.yml
+sed "s/host.*/host: $HOSTNAME/g" core.yml >tmp.yml && mv tmp.yml core.yml
+sed "s/username.*/username: $USER/g" core.yml >tmp.yml && mv tmp.yml core.yml
+sed "s/password.*/password: $PASSWORD/g" core.yml >tmp.yml && mv tmp.yml core.yml
+sed "s/    database.*/    database: $DB/g" core.yml >tmp.yml && mv tmp.yml core.yml #Grumble Grumble LWC has 2 config names called database
